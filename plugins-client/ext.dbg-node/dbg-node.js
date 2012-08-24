@@ -73,10 +73,10 @@ var v8DebugClient = exports.v8DebugClient = function() {
         });
     };
 
-    this.detach = function(callback) {
+    this.detach = function() {
         this.setFrame(null);
         if (!this.$v8dbg)
-            return callback();
+            return;
 
         this.$v8dbg = null;
         this.onChangeRunning();
@@ -84,7 +84,6 @@ var v8DebugClient = exports.v8DebugClient = function() {
         var _self = this;
         this.removeListeners();
         this.$v8ds.detach(0, function(err) {
-            callback && callback(err);
             _self.$v8ds = null;
         });
     };
